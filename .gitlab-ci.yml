@@ -1,0 +1,54 @@
+variables:
+  GOLANG_IMAGE: golang:1.13
+  GOARCH: amd64
+  GOPATH: /builds/ess-eds/gitlabcli/.go
+
+cache: &kache
+  key: $CI_COMMIT_REF_NAME
+  paths:
+    - .go/
+  policy: pull
+
+stages:
+  - test
+  - build
+
+test:
+  tags:
+    - gke
+    - exxmuc
+  image: $GOLANG_IMAGE
+  script:
+    - go test -v ./...
+  cache:
+    <<: *kache
+    policy: pull-push
+
+build darwin: &build
+  stage: build
+  tags:
+    - gke
+    - exxmuc
+  image: $GOLANG_IMAGE
+  variables:
+    GOOS: darwin
+  script:
+    - go build -ldflags "-X gitlabci.exxeta.com/ess-eds/gitlabcli/cmd.Version=$CI_COMMIT_REF_NAME" -o gitlabcli-$GOOS-$GOARCH
+  artifacts:
+    paths:
+      - gitlabcli-$GOOS-$GOARCH
+
+build linux:
+  <<: *build
+  variables:
+    GOOS: linux
+
+build windows:
+  <<: *build
+  variables:
+    GOOS: windows
+  script:
+    - go build -ldflags "-X gitlabci.exxeta.com/ess-eds/gitlabcli/cmd.Version=$CI_COMMIT_REF_NAME" -o gitlabcli-$GOOS-$GOARCH.exe
+  artifacts:
+    paths:
+      - gitlabcli-$GOOS-$GOARCH.exe
