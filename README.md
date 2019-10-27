@@ -34,6 +34,11 @@ In the command mode, user should enter the action and all the necessary argument
 - `gitlab-cli release get --project-id <project_id> --tag-name <tag_name> --url <gitlab_base_url> --token <your_access_token>` to get a release with project id and tag name
 - `gitlab-cli release create '{"name":"release 0.0.1","tag_name":"0.0.1","description":"A nice description","ref":"master","released_at":"2019-09-12T11:04:05+02:00"}' --url <gitlab_base_url> --token <your_access_token> --project-id <project_id>` to create a new release
 
+## TODO
+
+- Other actions can be added. Feel free to create pull requests or issues.
+- Save the gitlab server info (base url and access token) in a config file.
+
 ## Dev it!
 
 ### To build:
