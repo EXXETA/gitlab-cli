@@ -23,6 +23,17 @@ gitlab-cli provides a simple interface to interact with Gitlab servers. It has t
 
 Gitlab authentication is done using [Person Access Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html). To generate a new token, go to "Gitlab > User Settings > Access Token".
 
+
+### Config file
+
+The Gitlab base url and access token can be stored in a config file. The default location of the config file is `$HOME/.gitlab-cli-config.yml`.
+A Sample config file looks like this:
+
+```yaml
+baseUrl: https://gitlabci.example.com
+privateToken: 90we48534tgDFf345
+```
+
 ## Interactive mode
 
 In the interactive mode, gitlab-cli asks user the actions and parameters for each action in an interactive way.
@@ -37,7 +48,16 @@ In the command mode, user should enter the action and all the necessary argument
 ## TODO
 
 - Other actions can be added. Feel free to create pull requests or issues.
-- Save the gitlab server info (base url and access token) in a config file.
+- Introduce profiles in the config file and receive the active profile as an argument. Example:
+```yaml
+server1:
+    baseUrl: https://gitlabci.server1.com
+    privateToken: 90we48534tgDFf345
+server2:
+    baseUrl: https://gitlabci.server2.com
+    privateToken: 24r58534t2gfg4671
+```
+- Add a new argument to override the location of the config file.
 
 ## Dev it!
 

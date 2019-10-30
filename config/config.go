@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+
 	"github.com/spf13/viper"
 )
 
@@ -31,4 +32,9 @@ func InitConfig(configFileFromFlag string) {
 	} else {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
+}
+
+// GetConfigValue returns the value of a config parameter
+func GetConfigValue(parameterName string) string {
+	return viper.GetString(parameterName)
 }

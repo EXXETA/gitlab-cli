@@ -1,3 +1,2 @@
-repo1:
-  baseUrl: https://gitlabci.example.com
-  accessToken: exampleToken
+baseUrl: https://gitlabci.example.com
+privateToken: exampleToken
