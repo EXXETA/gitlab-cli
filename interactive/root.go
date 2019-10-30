@@ -10,8 +10,7 @@ import (
 )
 
 var (
-	rootActions         = []string{"projects", "releases", "exit"}
-	exxetaGitlabBaseURL = "https://gitlabci.exxeta.com"
+	rootActions = []string{"projects", "releases", "exit"}
 )
 
 // Execute main method of the interactive mode
