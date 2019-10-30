@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/EXXETA/gitlab-cli/config"
 	"github.com/EXXETA/gitlab-cli/interactive"
 	"github.com/EXXETA/gitlab-cli/service"
 	"github.com/spf13/cobra"
@@ -11,6 +12,11 @@ import (
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&service.GitlabBaseURL, "url", "u", "", "GitLab server base url")
 	rootCmd.PersistentFlags().StringVarP(&service.PrivateToken, "token", "t", "", "Personal access token to authenticate against GitLab")
+
+	// initialize the config file and read server settings
+	config.InitConfig("")
+	service.GitlabBaseURL = config.GetConfigValue("baseUrl")
+	service.PrivateToken = config.GetConfigValue("privateToken")
 }
 
 // rootCmd defines the root command of the gitlabacli command mode

@@ -10,25 +10,27 @@ import (
 )
 
 var (
-	rootActions         = []string{"projects", "releases", "exit"}
-	exxetaGitlabBaseURL = "https://gitlabci.exxeta.com"
+	rootActions = []string{"projects", "releases", "exit"}
 )
 
 // Execute main method of the interactive mode
 func Execute() {
 
-	fmt.Println(service.GitlabBaseURL)
 	// gitlab base url
-	gitlabURL := executeNotMaskedPrompt("Please enter your GitLab base url", exxetaGitlabBaseURL)
-	if gitlabURL != "" {
-		// remove the ending "/" from the URL if it has any
-		service.GitlabBaseURL = strings.TrimSuffix(gitlabURL, "/")
+	if service.GitlabBaseURL == "" {
+		gitlabURL := executeNotMaskedPrompt("Please enter your GitLab base url", "")
+		if gitlabURL != "" {
+			// remove the ending "/" from the URL if it has any
+			service.GitlabBaseURL = strings.TrimSuffix(gitlabURL, "/")
+		}
 	}
 
 	// person access token
-	personalToken := executeMaskedPrompt("Please enter your GitLab personal access token (You can find it under 'GitLab > User Settings > Access Tokens')", "")
-	if personalToken != "" {
-		service.PrivateToken = personalToken
+	if service.PrivateToken == "" {
+		personalToken := executeMaskedPrompt("Please enter your GitLab personal access token (You can find it under 'GitLab > User Settings > Access Tokens')", "")
+		if personalToken != "" {
+			service.PrivateToken = personalToken
+		}
 	}
 
 	// access the "/version" endpoint to make sure the url and the token are valid
