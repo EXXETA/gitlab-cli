@@ -82,4 +82,5 @@ or
 
 - [promptui](https://github.com/manifoldco/promptui)
 - [cobra](https://github.com/spf13/cobra)
+- [viper](https://github.com/spf13/viper)
 - [Testify](https://github.com/stretchr/testify)
